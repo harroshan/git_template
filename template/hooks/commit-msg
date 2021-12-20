@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+INPUT_FILE=$1
+START_LINE=`head -n1 $INPUT_FILE`
+PATTERN="(JIRA|INC|PRB)-[[:digit:]]+: [a-zA-Z ,0-9]{1,20}$"
+if ! [[ "$START_LINE" =~ $PATTERN ]]; then
+  echo "Bad commit message, see example: JIRA-123: commit message(max 20 char)"
+  exit 1
+fi
